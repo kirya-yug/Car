@@ -1,0 +1,227 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="TRPKModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Car">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" />
+    <Property Name="body_no" Type="String" MaxLength="11" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="license_plate" Type="String" MaxLength="9" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="mark" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="color" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="engine_no" Type="String" MaxLength="11" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="pass_no" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="results" Relationship="Self.results_column_2_Car_id_foreign" FromRole="Car" ToRole="results" />
+  </EntityType>
+  <EntityType Name="CarOwner">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" />
+    <Property Name="full_name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="address" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="gender" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="driver_license_no" Type="Int32" Nullable="false" />
+    <Property Name="DOB" Type="DateTime" Nullable="false" Precision="0" />
+    <NavigationProperty Name="results" Relationship="Self.results_id_car_CarOwner_id_foreign" FromRole="CarOwner" ToRole="results" />
+  </EntityType>
+  <EntityType Name="CompanyEmployee">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" />
+    <Property Name="login" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="password" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="full_name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="pass_no" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="results" Relationship="Self.results_id_employee_CompanyEmployee_id_foreign" FromRole="CompanyEmployee" ToRole="results" />
+  </EntityType>
+  <EntityType Name="Officer">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" />
+    <Property Name="login" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="password" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="full_name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="rank" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="position" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="results" Relationship="Self.results_id_officer_Officer_id_foreign" FromRole="Officer" ToRole="results" />
+  </EntityType>
+  <EntityType Name="results">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" />
+    <Property Name="id_car" Type="Int32" Nullable="false" />
+    <Property Name="id_officer" Type="Int32" />
+    <Property Name="id_employee" Type="Int32" Nullable="false" />
+    <Property Name="id_owner" Type="Int32" Nullable="false" />
+    <Property Name="id_inspection" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Car" Relationship="Self.results_column_2_Car_id_foreign" FromRole="results" ToRole="Car" />
+    <NavigationProperty Name="CarOwner" Relationship="Self.results_id_car_CarOwner_id_foreign" FromRole="results" ToRole="CarOwner" />
+    <NavigationProperty Name="CompanyEmployee" Relationship="Self.results_id_employee_CompanyEmployee_id_foreign" FromRole="results" ToRole="CompanyEmployee" />
+    <NavigationProperty Name="Officer" Relationship="Self.results_id_officer_Officer_id_foreign" FromRole="results" ToRole="Officer" />
+    <NavigationProperty Name="TechnicalInspection" Relationship="Self.results_id_inspection_TechnicalInspection_id_foreign" FromRole="results" ToRole="TechnicalInspection" />
+  </EntityType>
+  <EntityType Name="TechnicalInspection">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" />
+    <Property Name="conclusion" Type="Int32" Nullable="false" />
+    <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="results" Relationship="Self.results_id_inspection_TechnicalInspection_id_foreign" FromRole="TechnicalInspection" ToRole="results" />
+  </EntityType>
+  <Association Name="results_column_2_Car_id_foreign">
+    <End Role="Car" Type="Self.Car" Multiplicity="1" />
+    <End Role="results" Type="Self.results" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Car">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="results">
+        <PropertyRef Name="id_car" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="results_id_car_CarOwner_id_foreign">
+    <End Role="CarOwner" Type="Self.CarOwner" Multiplicity="1" />
+    <End Role="results" Type="Self.results" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CarOwner">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="results">
+        <PropertyRef Name="id_owner" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="results_id_employee_CompanyEmployee_id_foreign">
+    <End Role="CompanyEmployee" Type="Self.CompanyEmployee" Multiplicity="1" />
+    <End Role="results" Type="Self.results" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CompanyEmployee">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="results">
+        <PropertyRef Name="id_employee" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="results_id_officer_Officer_id_foreign">
+    <End Role="Officer" Type="Self.Officer" Multiplicity="0..1" />
+    <End Role="results" Type="Self.results" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Officer">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="results">
+        <PropertyRef Name="id_officer" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="results_id_inspection_TechnicalInspection_id_foreign">
+    <End Role="TechnicalInspection" Type="Self.TechnicalInspection" Multiplicity="1" />
+    <End Role="results" Type="Self.results" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TechnicalInspection">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="results">
+        <PropertyRef Name="id_inspection" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="TRPKEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Car" EntityType="Self.Car" />
+    <EntitySet Name="CarOwner" EntityType="Self.CarOwner" />
+    <EntitySet Name="CompanyEmployee" EntityType="Self.CompanyEmployee" />
+    <EntitySet Name="Officer" EntityType="Self.Officer" />
+    <EntitySet Name="results" EntityType="Self.results" />
+    <EntitySet Name="TechnicalInspection" EntityType="Self.TechnicalInspection" />
+    <AssociationSet Name="results_column_2_Car_id_foreign" Association="Self.results_column_2_Car_id_foreign">
+      <End Role="Car" EntitySet="Car" />
+      <End Role="results" EntitySet="results" />
+    </AssociationSet>
+    <AssociationSet Name="results_id_car_CarOwner_id_foreign" Association="Self.results_id_car_CarOwner_id_foreign">
+      <End Role="CarOwner" EntitySet="CarOwner" />
+      <End Role="results" EntitySet="results" />
+    </AssociationSet>
+    <AssociationSet Name="results_id_employee_CompanyEmployee_id_foreign" Association="Self.results_id_employee_CompanyEmployee_id_foreign">
+      <End Role="CompanyEmployee" EntitySet="CompanyEmployee" />
+      <End Role="results" EntitySet="results" />
+    </AssociationSet>
+    <AssociationSet Name="results_id_officer_Officer_id_foreign" Association="Self.results_id_officer_Officer_id_foreign">
+      <End Role="Officer" EntitySet="Officer" />
+      <End Role="results" EntitySet="results" />
+    </AssociationSet>
+    <AssociationSet Name="results_id_inspection_TechnicalInspection_id_foreign" Association="Self.results_id_inspection_TechnicalInspection_id_foreign">
+      <End Role="TechnicalInspection" EntitySet="TechnicalInspection" />
+      <End Role="results" EntitySet="results" />
+    </AssociationSet>
+    <FunctionImport Name="deleteCar">
+      <Parameter Name="id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="deleteCarOwner">
+      <Parameter Name="id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="deleteCompanyEmployee">
+      <Parameter Name="id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="deleteOfficer">
+      <Parameter Name="id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="deleteresults">
+      <Parameter Name="id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="deleteTechnicalInspection">
+      <Parameter Name="id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="incertCar">
+      <Parameter Name="id" Mode="In" Type="Int32" />
+      <Parameter Name="body_no" Mode="In" Type="String" />
+      <Parameter Name="license_plate" Mode="In" Type="String" />
+      <Parameter Name="mark" Mode="In" Type="String" />
+      <Parameter Name="color" Mode="In" Type="String" />
+      <Parameter Name="engine_no" Mode="In" Type="String" />
+      <Parameter Name="pass_no" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="incertCarOwner">
+      <Parameter Name="id" Mode="In" Type="Int32" />
+      <Parameter Name="full_name" Mode="In" Type="String" />
+      <Parameter Name="address" Mode="In" Type="String" />
+      <Parameter Name="gender" Mode="In" Type="String" />
+      <Parameter Name="driver_license_no" Mode="In" Type="Int32" />
+      <Parameter Name="DOB" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="incertCompanyEmployee">
+      <Parameter Name="id" Mode="In" Type="Int32" />
+      <Parameter Name="login" Mode="In" Type="String" />
+      <Parameter Name="password" Mode="In" Type="String" />
+      <Parameter Name="full_name" Mode="In" Type="String" />
+      <Parameter Name="pass_no" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="incertOfficer">
+      <Parameter Name="id" Mode="In" Type="Int32" />
+      <Parameter Name="login" Mode="In" Type="String" />
+      <Parameter Name="password" Mode="In" Type="String" />
+      <Parameter Name="full_name" Mode="In" Type="String" />
+      <Parameter Name="rank" Mode="In" Type="String" />
+      <Parameter Name="position" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="incertresults">
+      <Parameter Name="id" Mode="In" Type="Int32" />
+      <Parameter Name="id_car" Mode="In" Type="Int32" />
+      <Parameter Name="id_officer" Mode="In" Type="Int32" />
+      <Parameter Name="id_employee" Mode="In" Type="Int32" />
+      <Parameter Name="id_owner" Mode="In" Type="Int32" />
+      <Parameter Name="id_inspection" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="incertTechnicalInspection">
+      <Parameter Name="id" Mode="In" Type="Int32" />
+      <Parameter Name="conclusion" Mode="In" Type="Int32" />
+      <Parameter Name="Date" Mode="In" Type="DateTime" />
+    </FunctionImport>
+  </EntityContainer>
+</Schema>

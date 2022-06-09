@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="4b87483d81da4397a7a4a998bf5edcab" Name="Diagram1">
+        <EntityTypeShape EntityType="TRPKModel.Car" Width="1.5" PointX="0.75" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="TRPKModel.CarOwner" Width="1.5" PointX="0.75" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="TRPKModel.CompanyEmployee" Width="1.5" PointX="0.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TRPKModel.Officer" Width="1.5" PointX="0.75" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TRPKModel.results" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="TRPKModel.TechnicalInspection" Width="1.5" PointX="0.75" PointY="14.875" IsExpanded="true" />
+        <AssociationConnector Association="TRPKModel.results_column_2_Car_id_foreign" ManuallyRouted="false" />
+        <AssociationConnector Association="TRPKModel.results_id_car_CarOwner_id_foreign" ManuallyRouted="false" />
+        <AssociationConnector Association="TRPKModel.results_id_employee_CompanyEmployee_id_foreign" ManuallyRouted="false" />
+        <AssociationConnector Association="TRPKModel.results_id_officer_Officer_id_foreign" ManuallyRouted="false" />
+        <AssociationConnector Association="TRPKModel.results_id_inspection_TechnicalInspection_id_foreign" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

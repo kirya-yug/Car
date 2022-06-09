@@ -1,0 +1,182 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Хранилище TRPKModelContainer" CdmEntityContainer="TRPKEntities">
+    <EntitySetMapping Name="Car">
+      <EntityTypeMapping TypeName="TRPKModel.Car">
+        <MappingFragment StoreEntitySet="Car">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="body_no" ColumnName="body_no" />
+          <ScalarProperty Name="license_plate" ColumnName="license_plate" />
+          <ScalarProperty Name="mark" ColumnName="mark" />
+          <ScalarProperty Name="color" ColumnName="color" />
+          <ScalarProperty Name="engine_no" ColumnName="engine_no" />
+          <ScalarProperty Name="pass_no" ColumnName="pass_no" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="TRPKModel.Car">
+        <ModificationFunctionMapping>
+          <InsertFunction FunctionName="Хранилище TRPKModel.incertCar">
+            <ScalarProperty Name="pass_no" ParameterName="pass_no" />
+            <ScalarProperty Name="engine_no" ParameterName="engine_no" />
+            <ScalarProperty Name="color" ParameterName="color" />
+            <ScalarProperty Name="mark" ParameterName="mark" />
+            <ScalarProperty Name="license_plate" ParameterName="license_plate" />
+            <ScalarProperty Name="body_no" ParameterName="body_no" />
+            <ScalarProperty Name="id" ParameterName="id" />
+          </InsertFunction>
+          <DeleteFunction FunctionName="Хранилище TRPKModel.deleteCar">
+            <ScalarProperty Name="id" ParameterName="id" />
+          </DeleteFunction>
+          <UpdateFunction FunctionName="Хранилище TRPKModel.incertCar">
+            <ScalarProperty Name="pass_no" ParameterName="pass_no" Version="Current" />
+            <ScalarProperty Name="engine_no" ParameterName="engine_no" Version="Current" />
+            <ScalarProperty Name="color" ParameterName="color" Version="Current" />
+            <ScalarProperty Name="mark" ParameterName="mark" Version="Current" />
+            <ScalarProperty Name="license_plate" ParameterName="license_plate" Version="Current" />
+            <ScalarProperty Name="body_no" ParameterName="body_no" Version="Current" />
+            <ScalarProperty Name="id" ParameterName="id" Version="Current" />
+          </UpdateFunction>
+        </ModificationFunctionMapping>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CarOwner">
+      <EntityTypeMapping TypeName="TRPKModel.CarOwner">
+        <MappingFragment StoreEntitySet="CarOwner">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="full_name" ColumnName="full_name" />
+          <ScalarProperty Name="address" ColumnName="address" />
+          <ScalarProperty Name="gender" ColumnName="gender" />
+          <ScalarProperty Name="driver_license_no" ColumnName="driver_license_no" />
+          <ScalarProperty Name="DOB" ColumnName="DOB" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="TRPKModel.CarOwner">
+        <ModificationFunctionMapping>
+          <InsertFunction FunctionName="Хранилище TRPKModel.incertCarOwner">
+            <ScalarProperty Name="DOB" ParameterName="DOB" />
+            <ScalarProperty Name="driver_license_no" ParameterName="driver_license_no" />
+            <ScalarProperty Name="gender" ParameterName="gender" />
+            <ScalarProperty Name="address" ParameterName="address" />
+            <ScalarProperty Name="full_name" ParameterName="full_name" />
+            <ScalarProperty Name="id" ParameterName="id" />
+          </InsertFunction>
+          <DeleteFunction FunctionName="Хранилище TRPKModel.deleteCarOwner">
+            <ScalarProperty Name="id" ParameterName="id" />
+          </DeleteFunction>
+        </ModificationFunctionMapping>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CompanyEmployee">
+      <EntityTypeMapping TypeName="TRPKModel.CompanyEmployee">
+        <MappingFragment StoreEntitySet="CompanyEmployee">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="login" ColumnName="login" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="full_name" ColumnName="full_name" />
+          <ScalarProperty Name="pass_no" ColumnName="pass_no" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="TRPKModel.CompanyEmployee">
+        <ModificationFunctionMapping>
+          <InsertFunction FunctionName="Хранилище TRPKModel.incertCompanyEmployee">
+            <ScalarProperty Name="pass_no" ParameterName="pass_no" />
+            <ScalarProperty Name="full_name" ParameterName="full_name" />
+            <ScalarProperty Name="password" ParameterName="password" />
+            <ScalarProperty Name="login" ParameterName="login" />
+            <ScalarProperty Name="id" ParameterName="id" />
+          </InsertFunction>
+          <DeleteFunction FunctionName="Хранилище TRPKModel.deleteCompanyEmployee">
+            <ScalarProperty Name="id" ParameterName="id" />
+          </DeleteFunction>
+        </ModificationFunctionMapping>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Officer">
+      <EntityTypeMapping TypeName="TRPKModel.Officer">
+        <MappingFragment StoreEntitySet="Officer">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="login" ColumnName="login" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="full_name" ColumnName="full_name" />
+          <ScalarProperty Name="rank" ColumnName="rank" />
+          <ScalarProperty Name="position" ColumnName="position" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="TRPKModel.Officer">
+        <ModificationFunctionMapping>
+          <InsertFunction FunctionName="Хранилище TRPKModel.incertOfficer">
+            <ScalarProperty Name="position" ParameterName="position" />
+            <ScalarProperty Name="rank" ParameterName="rank" />
+            <ScalarProperty Name="full_name" ParameterName="full_name" />
+            <ScalarProperty Name="password" ParameterName="password" />
+            <ScalarProperty Name="login" ParameterName="login" />
+            <ScalarProperty Name="id" ParameterName="id" />
+          </InsertFunction>
+          <DeleteFunction FunctionName="Хранилище TRPKModel.deleteOfficer">
+            <ScalarProperty Name="id" ParameterName="id" />
+          </DeleteFunction>
+        </ModificationFunctionMapping>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="results">
+      <EntityTypeMapping TypeName="TRPKModel.results">
+        <MappingFragment StoreEntitySet="results">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="id_car" ColumnName="id_car" />
+          <ScalarProperty Name="id_officer" ColumnName="id_officer" />
+          <ScalarProperty Name="id_employee" ColumnName="id_employee" />
+          <ScalarProperty Name="id_owner" ColumnName="id_owner" />
+          <ScalarProperty Name="id_inspection" ColumnName="id_inspection" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="TRPKModel.results">
+        <ModificationFunctionMapping>
+          <InsertFunction FunctionName="Хранилище TRPKModel.incertresults">
+            <ScalarProperty Name="id_inspection" ParameterName="id_inspection" />
+            <ScalarProperty Name="id_owner" ParameterName="id_owner" />
+            <ScalarProperty Name="id_employee" ParameterName="id_employee" />
+            <ScalarProperty Name="id_officer" ParameterName="id_officer" />
+            <ScalarProperty Name="id_car" ParameterName="id_car" />
+            <ScalarProperty Name="id" ParameterName="id" />
+          </InsertFunction>
+          <DeleteFunction FunctionName="Хранилище TRPKModel.deleteresults">
+            <ScalarProperty Name="id" ParameterName="id" />
+          </DeleteFunction>
+        </ModificationFunctionMapping>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TechnicalInspection">
+      <EntityTypeMapping TypeName="TRPKModel.TechnicalInspection">
+        <MappingFragment StoreEntitySet="TechnicalInspection">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="conclusion" ColumnName="conclusion" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="TRPKModel.TechnicalInspection">
+        <ModificationFunctionMapping>
+          <DeleteFunction FunctionName="Хранилище TRPKModel.deleteTechnicalInspection">
+            <ScalarProperty Name="id" ParameterName="id" />
+          </DeleteFunction>
+          <InsertFunction FunctionName="Хранилище TRPKModel.incertTechnicalInspection">
+            <ScalarProperty Name="Date" ParameterName="Date" />
+            <ScalarProperty Name="conclusion" ParameterName="conclusion" />
+            <ScalarProperty Name="id" ParameterName="id" />
+          </InsertFunction>
+        </ModificationFunctionMapping>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="deleteCar" FunctionName="Хранилище TRPKModel.deleteCar" />
+    <FunctionImportMapping FunctionImportName="deleteCarOwner" FunctionName="Хранилище TRPKModel.deleteCarOwner" />
+    <FunctionImportMapping FunctionImportName="deleteCompanyEmployee" FunctionName="Хранилище TRPKModel.deleteCompanyEmployee" />
+    <FunctionImportMapping FunctionImportName="deleteOfficer" FunctionName="Хранилище TRPKModel.deleteOfficer" />
+    <FunctionImportMapping FunctionImportName="deleteresults" FunctionName="Хранилище TRPKModel.deleteresults" />
+    <FunctionImportMapping FunctionImportName="deleteTechnicalInspection" FunctionName="Хранилище TRPKModel.deleteTechnicalInspection" />
+    <FunctionImportMapping FunctionImportName="incertCar" FunctionName="Хранилище TRPKModel.incertCar" />
+    <FunctionImportMapping FunctionImportName="incertCarOwner" FunctionName="Хранилище TRPKModel.incertCarOwner" />
+    <FunctionImportMapping FunctionImportName="incertCompanyEmployee" FunctionName="Хранилище TRPKModel.incertCompanyEmployee" />
+    <FunctionImportMapping FunctionImportName="incertOfficer" FunctionName="Хранилище TRPKModel.incertOfficer" />
+    <FunctionImportMapping FunctionImportName="incertresults" FunctionName="Хранилище TRPKModel.incertresults" />
+    <FunctionImportMapping FunctionImportName="incertTechnicalInspection" FunctionName="Хранилище TRPKModel.incertTechnicalInspection" />
+  </EntityContainerMapping>
+</Mapping>

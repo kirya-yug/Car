@@ -1,0 +1,67 @@
+﻿@model CarPolice.Models.Car
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Car</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.body_no)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.body_no)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.license_plate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.license_plate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.mark)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.mark)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.color)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.color)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.engine_no)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.engine_no)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.pass_no)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pass_no)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

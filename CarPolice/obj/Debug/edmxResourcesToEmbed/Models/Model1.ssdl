@@ -1,0 +1,217 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Хранилище TRPKModel" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Car">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="body_no" Type="varchar" MaxLength="11" Nullable="false" />
+    <Property Name="license_plate" Type="varchar" MaxLength="9" Nullable="false" />
+    <Property Name="mark" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="color" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="engine_no" Type="varchar" MaxLength="11" Nullable="false" />
+    <Property Name="pass_no" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CarOwner">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="full_name" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="address" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="gender" Type="varchar" MaxLength="1" Nullable="false" />
+    <Property Name="driver_license_no" Type="int" Nullable="false" />
+    <Property Name="DOB" Type="date" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CompanyEmployee">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="login" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="password" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="full_name" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="pass_no" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Officer">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="login" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="password" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="full_name" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="rank" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="position" Type="varchar" MaxLength="20" Nullable="false" />
+  </EntityType>
+  <EntityType Name="results">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="id_car" Type="int" Nullable="false" />
+    <Property Name="id_officer" Type="int" />
+    <Property Name="id_employee" Type="int" Nullable="false" />
+    <Property Name="id_owner" Type="int" Nullable="false" />
+    <Property Name="id_inspection" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TechnicalInspection">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="conclusion" Type="int" Nullable="false" />
+    <Property Name="Date" Type="datetime" Nullable="false" />
+  </EntityType>
+  <Association Name="results_column_2_Car_id_foreign">
+    <End Role="Car" Type="Self.Car" Multiplicity="1" />
+    <End Role="results" Type="Self.results" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Car">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="results">
+        <PropertyRef Name="id_car" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="results_id_car_CarOwner_id_foreign">
+    <End Role="CarOwner" Type="Self.CarOwner" Multiplicity="1" />
+    <End Role="results" Type="Self.results" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CarOwner">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="results">
+        <PropertyRef Name="id_owner" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="results_id_employee_CompanyEmployee_id_foreign">
+    <End Role="CompanyEmployee" Type="Self.CompanyEmployee" Multiplicity="1" />
+    <End Role="results" Type="Self.results" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CompanyEmployee">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="results">
+        <PropertyRef Name="id_employee" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="results_id_inspection_TechnicalInspection_id_foreign">
+    <End Role="TechnicalInspection" Type="Self.TechnicalInspection" Multiplicity="1" />
+    <End Role="results" Type="Self.results" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TechnicalInspection">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="results">
+        <PropertyRef Name="id_inspection" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="results_id_officer_Officer_id_foreign">
+    <End Role="Officer" Type="Self.Officer" Multiplicity="0..1" />
+    <End Role="results" Type="Self.results" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Officer">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="results">
+        <PropertyRef Name="id_officer" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="deleteCar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="deleteCarOwner" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="deleteCompanyEmployee" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="deleteOfficer" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="deleteresults" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="deleteTechnicalInspection" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="incertCar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id" Type="int" Mode="In" />
+    <Parameter Name="body_no" Type="varchar" Mode="In" />
+    <Parameter Name="license_plate" Type="varchar" Mode="In" />
+    <Parameter Name="mark" Type="varchar" Mode="In" />
+    <Parameter Name="color" Type="varchar" Mode="In" />
+    <Parameter Name="engine_no" Type="varchar" Mode="In" />
+    <Parameter Name="pass_no" Type="int" Mode="In" />
+  </Function>
+  <Function Name="incertCarOwner" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id" Type="int" Mode="In" />
+    <Parameter Name="full_name" Type="varchar" Mode="In" />
+    <Parameter Name="address" Type="varchar" Mode="In" />
+    <Parameter Name="gender" Type="varchar" Mode="In" />
+    <Parameter Name="driver_license_no" Type="int" Mode="In" />
+    <Parameter Name="DOB" Type="date" Mode="In" />
+  </Function>
+  <Function Name="incertCompanyEmployee" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id" Type="int" Mode="In" />
+    <Parameter Name="login" Type="varchar" Mode="In" />
+    <Parameter Name="password" Type="varchar" Mode="In" />
+    <Parameter Name="full_name" Type="varchar" Mode="In" />
+    <Parameter Name="pass_no" Type="int" Mode="In" />
+  </Function>
+  <Function Name="incertOfficer" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id" Type="int" Mode="In" />
+    <Parameter Name="login" Type="varchar" Mode="In" />
+    <Parameter Name="password" Type="varchar" Mode="In" />
+    <Parameter Name="full_name" Type="varchar" Mode="In" />
+    <Parameter Name="rank" Type="varchar" Mode="In" />
+    <Parameter Name="position" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="incertresults" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id" Type="int" Mode="In" />
+    <Parameter Name="id_car" Type="int" Mode="In" />
+    <Parameter Name="id_officer" Type="int" Mode="In" />
+    <Parameter Name="id_employee" Type="int" Mode="In" />
+    <Parameter Name="id_owner" Type="int" Mode="In" />
+    <Parameter Name="id_inspection" Type="int" Mode="In" />
+  </Function>
+  <Function Name="incertTechnicalInspection" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id" Type="int" Mode="In" />
+    <Parameter Name="conclusion" Type="int" Mode="In" />
+    <Parameter Name="Date" Type="datetime" Mode="In" />
+  </Function>
+  <EntityContainer Name="Хранилище TRPKModelContainer">
+    <EntitySet Name="Car" EntityType="Self.Car" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CarOwner" EntityType="Self.CarOwner" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CompanyEmployee" EntityType="Self.CompanyEmployee" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Officer" EntityType="Self.Officer" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="results" EntityType="Self.results" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TechnicalInspection" EntityType="Self.TechnicalInspection" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="results_column_2_Car_id_foreign" Association="Self.results_column_2_Car_id_foreign">
+      <End Role="Car" EntitySet="Car" />
+      <End Role="results" EntitySet="results" />
+    </AssociationSet>
+    <AssociationSet Name="results_id_car_CarOwner_id_foreign" Association="Self.results_id_car_CarOwner_id_foreign">
+      <End Role="CarOwner" EntitySet="CarOwner" />
+      <End Role="results" EntitySet="results" />
+    </AssociationSet>
+    <AssociationSet Name="results_id_employee_CompanyEmployee_id_foreign" Association="Self.results_id_employee_CompanyEmployee_id_foreign">
+      <End Role="CompanyEmployee" EntitySet="CompanyEmployee" />
+      <End Role="results" EntitySet="results" />
+    </AssociationSet>
+    <AssociationSet Name="results_id_inspection_TechnicalInspection_id_foreign" Association="Self.results_id_inspection_TechnicalInspection_id_foreign">
+      <End Role="TechnicalInspection" EntitySet="TechnicalInspection" />
+      <End Role="results" EntitySet="results" />
+    </AssociationSet>
+    <AssociationSet Name="results_id_officer_Officer_id_foreign" Association="Self.results_id_officer_Officer_id_foreign">
+      <End Role="Officer" EntitySet="Officer" />
+      <End Role="results" EntitySet="results" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
